@@ -1,9 +1,11 @@
 import { Config } from "@netlify/functions";
 
 export default function (requestFromEdgeFunctions: Request) {
+  console.log("Catch-all function", requestFromEdgeFunctions);
   return Response.json({
     url: requestFromEdgeFunctions.url,
-    headers: Object.fromEntries(requestFromEdgeFunctions.headers.entries()),
+    headerAddedByEdgeFunction:
+      requestFromEdgeFunctions.headers.get("x-debug-behavior"),
   });
 }
 

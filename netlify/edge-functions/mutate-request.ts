@@ -1,12 +1,12 @@
 import { Config, Context } from "@netlify/edge-functions";
 
 export default function (requestFromOutsideWorld: Request, context: Context) {
-  const newRequest = new Request(
-    requestFromOutsideWorld.url,
-    requestFromOutsideWorld
+  console.log("Mutate-request", requestFromOutsideWorld);
+  requestFromOutsideWorld.headers.set(
+    "x-debug-behavior",
+    "mutated request headers before context.next()"
   );
-  newRequest.headers.set("x-debug-behavior", "passed new request in");
-  return context.next(newRequest);
+  return context.next();
 }
 
 export const config: Config = {
