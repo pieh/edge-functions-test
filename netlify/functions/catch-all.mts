@@ -6,6 +6,7 @@ export default function (requestFromEdgeFunctions: Request) {
     url: requestFromEdgeFunctions.url,
     headerAddedByEdgeFunction:
       requestFromEdgeFunctions.headers.get("x-debug-behavior"),
+    somethingFromLambda: "Hello from lambda",
   });
 }
 
